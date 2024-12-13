@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    volumes:
+      - type: image
+        source: laurentgoderre689/test-data:17
+        target: /var/lib/postgresql/data
+  
+  client:
+    image: postgres:17-alpine
+    command: ["sh", "-c", "sleep 2 && psql -h postgres -c \"SELECT * FROM profiles_dockeruser WHERE username='testconvert4'\""]
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: '1234'
+      PGDATABASE: postgres
+    depends_on:
+      - postgres

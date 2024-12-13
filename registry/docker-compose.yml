@@ -1,0 +1,12 @@
+services:
+  registry:
+    image: registry:2.8.3
+    environment:
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+    ports:
+      - 5000:5000
+    volumes:
+      - type: image
+        source: laurentgoderre689/buildkit-integration-registry
+        target: /data
+      
