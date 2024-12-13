@@ -1,0 +1,10 @@
+services:
+  bert:
+    image: laurentgoderre689/ai-demo
+    environment:
+      MODEL_PATH: /model/bertsquad-12.onnx
+    volumes:
+      - type: image
+        source: laurentgoderre689/models:bert
+        target: /model
+    command: ['tail', '-f', '/dev/null']

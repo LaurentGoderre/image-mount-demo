@@ -1,0 +1,23 @@
+services:
+  # Need to copy instead of mount directly until RW is supported
+  postgres:
+    image: postgres:17-alpine
+    command: sh -c 'cp -rp /init/* /var/lib/postgresql/data/ && chmod 0750 /var/lib/postgresql/data && gosu postgres postgres'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - type: image
+        source: laurentgoderre689/test-data:17
+        target: /init
+  
+  client:
+    image: postgres:17-alpine
+    command: ["sh", "-c", "sleep 2 && psql -h postgres -c \"SELECT * FROM humanresources.employee WHERE jobtitle LIKE 'Chief%'\""]
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: '1234'
+      PGDATABASE: Adventureworks
+    depends_on:
+      - postgres
+
+volumes:
+  db-data:
