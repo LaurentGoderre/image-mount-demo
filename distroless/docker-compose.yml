@@ -1,0 +1,11 @@
+services:
+  myapp:
+    build: .
+    command: /debug/dlv --headless --listen=0.0.0.0:2345 --api-version=2 --only-same-user=false --log exec /myapp --
+    ports:
+      - 2345:2345
+    volumes:
+      - ./src/:/go/src/github.com/LaurentGoderre/myapp/
+      - type: image
+        source: laurentgoderre689/delve
+        target: /debug
