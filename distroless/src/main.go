@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	fmt.Print("hello world")
+	fmt.Println("hello world")
+	time.Sleep(8 * time.Minute)
 }
