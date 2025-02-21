@@ -18,7 +18,7 @@ docker run \
   -p 2345:2345 \
   -e DOCKER_TLS_CERTDIR=/certs \
   -v ${HOME}/.docker/local/certs/:/certs/client \
-  docker:28.0.0-rc.1-dind \
+  docker:28-dind \
     --feature=containerd-snapshotter \
     --storage-driver=overlayfs
 ```
